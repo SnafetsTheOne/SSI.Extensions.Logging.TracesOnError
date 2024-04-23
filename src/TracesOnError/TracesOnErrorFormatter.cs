@@ -22,12 +22,19 @@ namespace SSI.Extensions.Logging.TracesOnError
                 sb.AppendLine();
             }
 
-            WriteTracesToStringBuilder(logs, padding, sb);
+            ProcessMessagesOnly(logs, padding, sb);
 
             return sb.ToString();
         }
 
-        public void WriteTracesToStringBuilder(IList<LogEntry> logs, string padding, StringBuilder sb)
+        public string ProcessMessagesOnly(IList<LogEntry> logs) 
+        {
+            var sb = new StringBuilder();
+            ProcessMessagesOnly(logs, new string(' ', 2), sb);
+            return sb.ToString();
+        }
+
+        public void ProcessMessagesOnly(IList<LogEntry> logs, string padding, StringBuilder sb)
         {
             sb.AppendLine("Traces:");
             foreach (var log in logs)
@@ -52,7 +59,7 @@ namespace SSI.Extensions.Logging.TracesOnError
                     sb.Append("=>");
                 }
             }
-
+            sb.AppendLine();
         }
     }
 }

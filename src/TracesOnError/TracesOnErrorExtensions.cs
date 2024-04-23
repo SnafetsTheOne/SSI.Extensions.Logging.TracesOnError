@@ -61,10 +61,8 @@ namespace SSI.Extensions.Logging.TracesOnError
             IList<LogEntry> logs;
             if(_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
             {
-                var sb = new StringBuilder(message);
-                sb.AppendLine();
-                Formatter.Process(logs);
-                logger.LogError(exception, sb.ToString());
+                var traces = Formatter.ProcessMessagesOnly(logs) + "  " + message + Environment.NewLine;
+                logger.LogError(exception, traces);
             }
             else
             {
@@ -77,10 +75,8 @@ namespace SSI.Extensions.Logging.TracesOnError
             IList<LogEntry> logs;
             if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
             {
-                var sb = new StringBuilder(message);
-                sb.AppendLine();
-                Formatter.Process(logs);
-                logger.LogError(sb.ToString());
+                var traces = Formatter.ProcessMessagesOnly(logs) + "  " + message + Environment.NewLine;
+                logger.LogError(traces);
             }
             else
             {
@@ -93,10 +89,8 @@ namespace SSI.Extensions.Logging.TracesOnError
             IList<LogEntry> logs;
             if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
             {
-                var sb = new StringBuilder(message);
-                sb.AppendLine();
-                Formatter.Process(logs);
-                logger.LogCritical(exception, sb.ToString());
+                var traces = Formatter.ProcessMessagesOnly(logs) + Environment.NewLine + "  " + message;
+                logger.LogCritical(exception, traces);
             }
             else
             {
@@ -109,10 +103,8 @@ namespace SSI.Extensions.Logging.TracesOnError
             IList<LogEntry> logs;
             if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
             {
-                var sb = new StringBuilder(message);
-                sb.AppendLine();
-                Formatter.Process(logs);
-                logger.LogCritical(sb.ToString());
+                var traces = Formatter.ProcessMessagesOnly(logs) + Environment.NewLine + "  " + message;
+                logger.LogCritical(traces);
             }
             else
             {

@@ -29,7 +29,7 @@ namespace SSI.Extensions.Logging.TracesOnError
         
             var logs = _storageProvider.GetLogs();
 
-            logs.Add(CreateLogEntry<TLogState>(logLevel, eventId, state, exception, formatter));
+            logs.Add(CreateLogEntry(logLevel, eventId, state, exception, formatter));
 
             if (logLevel < Options.ErrorThreshold)
                 return;

@@ -2,14 +2,17 @@ using SSI.Extensions.Logging.TracesOnError;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add logging to the container.
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddTracesOnError(NullTracesOnErrorLogSink.Instance);
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Logging.AddTracesOnError(NullTracesOnErrorLogSink.Instance);
 
 var app = builder.Build();
 

@@ -6,5 +6,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public string ProcessMessagesOnly(IList<LogEntry> logs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

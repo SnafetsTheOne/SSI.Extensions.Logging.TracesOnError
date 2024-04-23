@@ -17,7 +17,7 @@ namespace SSI.Extensions.Logging.TracesOnError.Console.Controllers
             }
             catch(Exception ex)
             {
-                logger.LogError(ex, "TestController.Get");
+                logger.LogError(ex, "TestController.Get ExceptionHandler");
             }
         }
     }

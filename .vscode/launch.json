@@ -1,0 +1,73 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Example: Console",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.Console/bin/Debug/net8.0/SSI.Extensions.Logging.TracesOnError.Console.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.Console",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Example: EnrichExisting",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.EnrichExisting/bin/Debug/net8.0/SSI.Extensions.Logging.TracesOnError.EnrichExisting.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.EnrichExisting",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Example: ApplicationInsights",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.ApplicationInsights/bin/Debug/net8.0/SSI.Extensions.Logging.TracesOnError.ApplicationInsights.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/SSI.Extensions.Logging.TracesOnError.ApplicationInsights",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
