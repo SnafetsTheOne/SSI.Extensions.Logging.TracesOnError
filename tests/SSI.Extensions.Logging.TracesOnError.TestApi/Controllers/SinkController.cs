@@ -4,7 +4,7 @@ namespace SSI.Extensions.Logging.TracesOnError.TestApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ErrorController(ILogger<ErrorController> logger) : ControllerBase
+public class SinkController(ILogger<SinkController> logger) : ControllerBase
 {
     [HttpGet("Exception")]
     public void Get()

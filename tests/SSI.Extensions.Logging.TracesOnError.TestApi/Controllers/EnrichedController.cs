@@ -5,7 +5,7 @@ namespace SSI.Extensions.Logging.TracesOnError.TestApi.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class EnrichedController(ILogger<ErrorController> logger) : ControllerBase
+public class EnrichedController(ILogger<EnrichedController> logger) : ControllerBase
 {
     [HttpGet("Error/Message")]
     public void ErrorMessage()

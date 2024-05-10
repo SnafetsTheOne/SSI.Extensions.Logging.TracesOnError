@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add logging to the container.
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Logging.AddTracesOnError(NullTracesOnErrorLogSink.Instance);
+builder.Logging.AddTracesOnErrorWithoutLogSink();
 
 // Add services to the container.
 builder.Services.AddControllers();
