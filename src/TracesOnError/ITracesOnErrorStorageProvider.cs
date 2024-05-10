@@ -1,7 +1,6 @@
-﻿namespace SSI.Extensions.Logging.TracesOnError
+﻿namespace SSI.Extensions.Logging.TracesOnError;
+
+internal interface ITracesOnErrorStorageProvider
 {
-    internal interface ITracesOnErrorStorageProvider
-    {
-        IList<LogEntry> GetLogs();
-    }
+    IList<LogEntry> GetLogs();
 }

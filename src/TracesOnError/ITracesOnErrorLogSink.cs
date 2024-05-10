@@ -1,7 +1,6 @@
-﻿namespace SSI.Extensions.Logging.TracesOnError
+﻿namespace SSI.Extensions.Logging.TracesOnError;
+
+public interface ITracesOnErrorLogSink
 {
-    public interface ITracesOnErrorLogSink
-    {
-        void WriteLog(IList<LogEntry> logs);
-    }
+    void WriteLog(IList<LogEntry> logs);
 }

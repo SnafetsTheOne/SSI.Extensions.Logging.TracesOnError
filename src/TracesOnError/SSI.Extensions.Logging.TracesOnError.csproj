@@ -11,9 +11,11 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>SSI.Extensions.Logging.TracesOnError.Tests</_Parameter1>
-    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+	  <InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.Tests" />
+	  <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
 </Project>

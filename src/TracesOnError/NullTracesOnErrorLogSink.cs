@@ -1,15 +1,14 @@
-﻿namespace SSI.Extensions.Logging.TracesOnError
+﻿namespace SSI.Extensions.Logging.TracesOnError;
+
+public class NullTracesOnErrorLogSink : ITracesOnErrorLogSink
 {
-    public class NullTracesOnErrorLogSink : ITracesOnErrorLogSink
+    public static NullTracesOnErrorLogSink Instance { get; } = new NullTracesOnErrorLogSink();
+
+    private NullTracesOnErrorLogSink()
     {
-        public static NullTracesOnErrorLogSink Instance { get; } = new NullTracesOnErrorLogSink();
+    }
 
-        private NullTracesOnErrorLogSink()
-        {
-        }
-
-        public void WriteLog(IList<LogEntry> logs)
-        {
-        }
+    public void WriteLog(IList<LogEntry> logs)
+    {
     }
 }
