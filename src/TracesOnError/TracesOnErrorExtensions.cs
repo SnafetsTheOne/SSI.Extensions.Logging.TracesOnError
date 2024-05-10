@@ -22,12 +22,12 @@ public static class TracesOnErrorExtensions
                                                         throw new InvalidOperationException(UninitializedMessage);
     private static ITracesOnErrorFormatter? _formatter;
 
-    public static ILoggingBuilder AddTracesOnError(this ILoggingBuilder builder, ITracesOnErrorLogSink logSink)
+    public static ILoggingBuilder AddTracesOnError(this ILoggingBuilder builder, ITracesOnErrorLogSink logSink, ITracesOnErrorFormatter? formatter = null)
     {
         builder.AddConfiguration();
 
         _storageProvider = new TracesOnErrorStorageProvider();
-        _formatter = new TracesOnErrorFormatter();
+        _formatter = formatter ?? new TracesOnErrorFormatter();
         _logSink = logSink;
 
         builder.Services.AddOptions<TracesOnErrorOptions>().BindConfiguration(TracesOnErrorOptions.SectionName);
@@ -43,7 +43,7 @@ public static class TracesOnErrorExtensions
     {
         builder.AddConfiguration();
 
-        _storageProvider = new TracesOnErrorStorageProvider();
+        _storageProvider = new TracesOnErrorStorageProvider();  
         _formatter = formatter ?? new TracesOnErrorFormatter();
         _logSink = new FormattedTracesOnErrorLogSink(Formatter, logSink);
 
@@ -55,6 +55,24 @@ public static class TracesOnErrorExtensions
 
         return builder;
     }
+
+    public static ILoggingBuilder AddTracesOnErrorWithoutLogSink(this ILoggingBuilder builder, ITracesOnErrorFormatter? formatter = null)
+    {
+        builder.AddConfiguration();
+
+        _storageProvider = new TracesOnErrorStorageProvider();
+        _formatter = formatter ?? new TracesOnErrorFormatter();
+        _logSink = NullTracesOnErrorLogSink.Instance;
+
+        builder.Services.AddOptions<TracesOnErrorOptions>().BindConfiguration(TracesOnErrorOptions.SectionName);
+        builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>, TracesOnErrorConfigurationOptions>();
+
+        builder.Services.AddSingleton<ILoggerProvider>(sp =>
+            new TracesOnErrorLoggerProvider(LogSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
+
+        return builder;
+    }
+
 
     public static void LogErrorWithTraces<T>(this ILogger<T> logger, Exception exception, string message)
     {

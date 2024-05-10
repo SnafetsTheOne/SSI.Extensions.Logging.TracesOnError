@@ -15,6 +15,7 @@
 
   <ItemGroup>
 	  <InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.Tests" />
+	  <InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.IntegrationTests" />
 	  <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 

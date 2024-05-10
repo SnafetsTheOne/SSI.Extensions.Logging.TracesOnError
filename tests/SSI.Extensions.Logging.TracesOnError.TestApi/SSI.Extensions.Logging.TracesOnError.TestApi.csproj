@@ -10,4 +10,8 @@
 		<InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.IntegrationTests" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\TracesOnError\SSI.Extensions.Logging.TracesOnError.csproj" />
+	</ItemGroup>
+
 </Project>

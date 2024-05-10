@@ -6,18 +6,26 @@ namespace SSI.Extensions.Logging.TracesOnError.TestApi.Controllers;
 [Route("[controller]")]
 public class ErrorController(ILogger<ErrorController> logger) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("Exception")]
     public void Get()
     {
-        logger.LogTrace("TestController.Get");
+        logger.LogTrace("TraceMessage");
 
         try
         {
-            throw new Exception("Test exception");
+            throw new Exception("ExceptionMessage");
         }
         catch(Exception ex)
         {
-            logger.LogError(ex, "TestController.Get ExceptionHandler");
+            logger.LogError(ex, "ErrorMessage");
         }
+    }
+
+    [HttpGet("Message")]
+    public void GetMessage()
+    {
+        logger.LogTrace("TraceMessage");
+
+        logger.LogError("ErrorMessage");
     }
 }
