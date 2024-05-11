@@ -3,8 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Stefan Sitkovich</Authors>
+    <Description>provides functionality to enrich log messages with all previous traces</Description>
+    <Copyright>Copyright (c) Stefan Sitkovich 2024</Copyright>
+    <ProjectURL>https://github.com/SnafetsTheOne/SSI.Extensions.Logging.TracesOnError</ProjectURL>
+    <Readme>README.md</Readme>
+    <Tags>Logging</Tags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +26,12 @@
 	  <InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.Tests" />
 	  <InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.IntegrationTests" />
 	  <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,10 @@
-name: CI
+name: Continuous Integration
 
 on: [push, pull_request]
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
-
-  NUGET_FEED: https://api.nuget.org/v3/index.json
 
 jobs:
   build-dotnet:
@@ -75,7 +73,7 @@ jobs:
           dotnet pack -c Release --include-source -p:Version=$VERSION -o ./dist src/TracesOnError/SSI.Extensions.Logging.TracesOnError.csproj
 
       - name: Push
-        run: dotnet nuget push ./dist/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./dist/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
