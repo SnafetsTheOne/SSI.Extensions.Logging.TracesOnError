@@ -19,6 +19,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
+
+      - name: Install dotnet coverage
+        run: dotnet tool install --global dotnet-coverage
   
       - name: Restore
         run: dotnet restore
@@ -27,15 +30,18 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test --no-build --verbosity normal -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover
-        
+        run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+      - name: Coverage
+        run: dotnet-coverage merge ./coverage/ -f cobertura -o ./coverage/report.cobertuera.xml 
+      
       - name: Create Test Coverage Badge
         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
         id: create_coverage_badge
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: $GITHUB_WORKSPACE/TestResults/coverage.opencover.xml
+          path: $GITHUB_WORKSPACE/coverage/report.cobertuera.xml
           gist-filename: traces-on-error-code-coverage.json
           gist-id: 1470f35007c3e7b1d7e98eae110253ca
           gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}       

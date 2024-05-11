@@ -19,6 +19,7 @@ public class ActionSinkWithFormatterTests
 
         await using var webApp = new CustomWebApplicationFactory(logging =>
         {
+            logging.ClearProviders();
             logging.AddTracesOnError(sink, formatter);
         });
 

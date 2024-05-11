@@ -18,6 +18,7 @@ public class SinkOnlyTests
 
         await using var webApp = new CustomWebApplicationFactory(logging =>
         {
+            logging.ClearProviders();
             logging.AddTracesOnError(sink);
         });
 

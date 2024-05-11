@@ -14,6 +14,7 @@ public class NoSinkTests
     {
         await using var webApp = new CustomWebApplicationFactory(logging =>
         {
+            logging.ClearProviders();
             logging.AddTracesOnErrorWithoutLogSink();
         });
 
