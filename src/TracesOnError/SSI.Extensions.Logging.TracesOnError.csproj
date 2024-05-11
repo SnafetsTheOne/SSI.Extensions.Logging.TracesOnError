@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Authors>Stefan Sitkovich</Authors>
+	  <Version>0.1.0</Version>
+	  <Authors>Stefan Sitkovich</Authors>
     <Description>provides functionality to enrich log messages with all previous traces</Description>
     <Copyright>Copyright (c) Stefan Sitkovich 2024</Copyright>
     <ProjectURL>https://github.com/SnafetsTheOne/SSI.Extensions.Logging.TracesOnError</ProjectURL>
-    <Readme>README.md</Readme>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Tags>Logging</Tags>
   </PropertyGroup>
 
@@ -29,9 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="README.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
