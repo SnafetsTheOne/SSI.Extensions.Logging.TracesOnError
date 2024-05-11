@@ -33,10 +33,10 @@ jobs:
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Coverage
-        run: dotnet-coverage merge ./coverage/ -f cobertura -o ./coverage/report.cobertuera.xml 
+        run: dotnet-coverage merge ./coverage/ -f cobertura -o ./coverage/report.cobertuera.xml
       
       - name: Create Test Coverage Badge
-        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+        uses: SnafetsTheOne/gist-code-coverage-badge@0.1.0
         id: create_coverage_badge
         with:
           label: Unit Test Coverage
@@ -44,7 +44,7 @@ jobs:
           path: ./coverage/report.cobertuera.xml
           gist-filename: traces-on-error-code-coverage.json
           gist-id: 1470f35007c3e7b1d7e98eae110253ca
-          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}       
+          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}
   
       - name: Pack
         run: dotnet pack --verbosity normal -c Release --no-restore --include-source --version-suffix alpha.${{ github.run_number }} -o ./dist
