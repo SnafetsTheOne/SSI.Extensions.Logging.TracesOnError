@@ -1,5 +1,6 @@
 ﻿namespace SSI.Extensions.Logging.TracesOnError.IntegrationTests.Tests;
 
+[Collection("web")]
 public class NoSinkTests
 {
     [Theory]
@@ -9,9 +10,9 @@ public class NoSinkTests
     [InlineData("/Enriched/Error/Exception")]
     [InlineData("/Enriched/Critical/Message")]
     [InlineData("/Enriched/Critical/Exception")]
-    public async Task SinkOnly(string url)
+    public async Task WithoutLogSink(string url)
     {
-        var webApp = new CustomWebApplicationFactory(logging =>
+        await using var webApp = new CustomWebApplicationFactory(logging =>
         {
             logging.AddTracesOnErrorWithoutLogSink();
         });

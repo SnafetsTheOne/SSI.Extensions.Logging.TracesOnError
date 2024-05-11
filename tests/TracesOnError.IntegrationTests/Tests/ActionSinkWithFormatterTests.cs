@@ -2,6 +2,7 @@
 
 namespace SSI.Extensions.Logging.TracesOnError.IntegrationTests.Tests;
 
+[Collection("web")]
 public class ActionSinkWithFormatterTests
 {
     [Theory]
@@ -11,12 +12,12 @@ public class ActionSinkWithFormatterTests
     [InlineData("/Enriched/Error/Exception")]
     [InlineData("/Enriched/Critical/Message")]
     [InlineData("/Enriched/Critical/Exception")]
-    public async Task SinkOnly(string url)
+    public async Task SinkAndFormatter(string url)
     {
         var sink = Substitute.For<Action<string>>();
         var formatter = Substitute.For<ITracesOnErrorFormatter>();
 
-        var webApp = new CustomWebApplicationFactory(logging =>
+        await using var webApp = new CustomWebApplicationFactory(logging =>
         {
             logging.AddTracesOnError(sink, formatter);
         });

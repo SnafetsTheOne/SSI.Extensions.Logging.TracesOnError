@@ -2,6 +2,7 @@
 
 namespace SSI.Extensions.Logging.TracesOnError.IntegrationTests.Tests;
 
+[Collection("web")]
 public class SinkOnlyTests
 {
     [Theory]
@@ -15,7 +16,7 @@ public class SinkOnlyTests
     {
         var sink = Substitute.For<ITracesOnErrorLogSink>();
 
-        var webApp = new CustomWebApplicationFactory(logging =>
+        await using var webApp = new CustomWebApplicationFactory(logging =>
         {
             logging.AddTracesOnError(sink);
         });
