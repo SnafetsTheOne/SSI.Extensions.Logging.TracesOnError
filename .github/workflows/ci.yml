@@ -41,7 +41,7 @@ jobs:
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: $GITHUB_WORKSPACE/coverage/report.cobertuera.xml
+          path: ./coverage/report.cobertuera.xml
           gist-filename: traces-on-error-code-coverage.json
           gist-id: 1470f35007c3e7b1d7e98eae110253ca
           gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}       
