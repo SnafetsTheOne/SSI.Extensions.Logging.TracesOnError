@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="SSI.Extensions.Logging.TracesOnError.IntegrationTests" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\TracesOnError\SSI.Extensions.Logging.TracesOnError.csproj" />
+	</ItemGroup>
+
+</Project>
