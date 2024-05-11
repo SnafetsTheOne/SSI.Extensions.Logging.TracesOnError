@@ -19,9 +19,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-
-      - name: Restore Tools
-        run: dotnet tool restore
   
       - name: Restore
         run: dotnet restore
@@ -30,23 +27,19 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test --no-build --verbosity normal  --collect:"XPlat Code Coverage"
-
-      - name: dotnet-coverage
-        run: dotnet-coverage merge $GITHUB_WORKSPACE\TestResults\ -f cobertura -o $GITHUB_WORKSPACE/TestResults/report.cobertuera.xml
-
-      - name: generate coverage report
-        run: dotnet reportgenerator -reports:$GITHUB_WORKSPACE/TestResults/report.cobertuera.xml -targetdir:$GITHUB_WORKSPACE/coverage -reporttypes:MarkdownSummary 
+        run: dotnet test --no-build --verbosity normal -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover
         
-      - name: Create check run with code coverage Markdown report
-        uses: LouisBrunner/checks-action@v1.2.0
+      - name: Create Test Coverage Badge
+        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+        id: create_coverage_badge
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Code coverage
-          conclusion: ${{ job.status }}
-          output: '{"summary":"Code coverage"}'
-          output_text_description_file: coverage/Summary.md
-
+          label: Unit Test Coverage
+          color: brightgreen
+          path: $GITHUB_WORKSPACE/TestResults/coverage.opencover.xml
+          gist-filename: traces-on-error-code-coverage.json
+          gist-id: 1470f35007c3e7b1d7e98eae110253ca
+          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}       
+  
       - name: Pack
         run: dotnet pack --verbosity normal -c Release --no-restore --include-source --version-suffix alpha.${{ github.run_number }} -o ./dist
 
