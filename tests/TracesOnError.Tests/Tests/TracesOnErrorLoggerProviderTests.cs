@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
-using SSI.Extensions.Logging.TracesOnError.Tests.Helper;
+using Snafets.Extensions.Logging.TracesOnError.Tests.Helper;
 
-namespace SSI.Extensions.Logging.TracesOnError.Tests.Tests;
+namespace Snafets.Extensions.Logging.TracesOnError.Tests.Tests;
 
 public class TracesOnErrorLoggerProviderTests
 {

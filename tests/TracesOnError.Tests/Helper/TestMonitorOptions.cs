@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace SSI.Extensions.Logging.TracesOnError.Tests.Helper;
+namespace Snafets.Extensions.Logging.TracesOnError.Tests.Helper;
 
 internal class TestMonitorOptions<TOptions> : IOptionsMonitor<TOptions>, IDisposable 
 {

@@ -1,4 +1,4 @@
-﻿namespace SSI.Extensions.Logging.TracesOnError.IntegrationTests.Tests;
+﻿namespace Snafets.Extensions.Logging.TracesOnError.IntegrationTests.Tests;
 
 [Collection("web")]
 public class NoSinkTests

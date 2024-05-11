@@ -1,4 +1,4 @@
-# SSI.Extensions.Logging.TracesOnError
+# Snafets.Extensions.Logging.TracesOnError
 
 provides functionality to enrich log messages with all previous traces
 
@@ -29,4 +29,4 @@ logger.LogErrorWithTraces(exception, "message");
 
 ## Examples
 
-[examples](https://github.com/SnafetsTheOne/SSI.Extensions.Logging.TracesOnError/tree/main/examples)
+[examples](https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError/tree/main/examples)

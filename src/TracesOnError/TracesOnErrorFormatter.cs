@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 internal class TracesOnErrorFormatter : ITracesOnErrorFormatter
 {

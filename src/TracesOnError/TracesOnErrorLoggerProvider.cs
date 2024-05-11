@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 [ProviderAlias("TracesOnError")]
 internal class TracesOnErrorLoggerProvider : ILoggerProvider, ISupportExternalScope

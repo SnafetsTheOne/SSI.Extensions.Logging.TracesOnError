@@ -1,4 +1,4 @@
-﻿namespace SSI.Extensions.Logging.TracesOnError;
+﻿namespace Snafets.Extensions.Logging.TracesOnError;
 
 public interface ITracesOnErrorLogSink
 {

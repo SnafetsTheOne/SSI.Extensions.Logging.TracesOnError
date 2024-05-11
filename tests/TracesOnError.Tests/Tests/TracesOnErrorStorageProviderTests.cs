@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using System.Diagnostics;
 
-namespace SSI.Extensions.Logging.TracesOnError.Tests.Tests;
+namespace Snafets.Extensions.Logging.TracesOnError.Tests.Tests;
 
 public class TracesOnErrorStorageProviderTests
 {

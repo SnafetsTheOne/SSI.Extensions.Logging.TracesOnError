@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
-namespace SSI.Extensions.Logging.TracesOnError.Tests.Tests;
+namespace Snafets.Extensions.Logging.TracesOnError.Tests.Tests;
 
 public class FormattedTracesOnErrorLogSinkTests
 {

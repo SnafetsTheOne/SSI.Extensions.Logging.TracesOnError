@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SSI.Extensions.Logging.TracesOnError.IntegrationTests": {
+    "Snafets.Extensions.Logging.TracesOnError.IntegrationTests": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
