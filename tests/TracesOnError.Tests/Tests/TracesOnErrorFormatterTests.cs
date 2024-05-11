@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace SSI.Extensions.Logging.TracesOnError.Tests.Tests;
+namespace Snafets.Extensions.Logging.TracesOnError.Tests.Tests;
 
 public class TracesOnErrorFormatterTests
 {
@@ -70,7 +70,7 @@ public class TracesOnErrorFormatterTests
         result.Should().StartWith("""
                                   Exception:
                                     System.Exception: ErrorMessage
-                                       at SSI.Extensions.Logging.TracesOnError.Tests.Tests.TracesOnErrorFormatterTests.CreateException(String message) in
+                                       at Snafets.Extensions.Logging.TracesOnError.Tests.Tests.TracesOnErrorFormatterTests.CreateException(String message) in
                                   """);
         result.Should().EndWith("""
                                 Traces:
@@ -144,7 +144,7 @@ public class TracesOnErrorFormatterTests
         result.Should().StartWith("""
                                   Exception:
                                     System.Exception: ErrorMessage
-                                       at SSI.Extensions.Logging.TracesOnError.Tests.Tests.TracesOnErrorFormatterTests.CreateException(String message) in
+                                       at Snafets.Extensions.Logging.TracesOnError.Tests.Tests.TracesOnErrorFormatterTests.CreateException(String message) in
                                   """);
         result.Should().EndWith("""
                                 Traces:

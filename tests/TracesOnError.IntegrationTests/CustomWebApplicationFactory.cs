@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace SSI.Extensions.Logging.TracesOnError.IntegrationTests;
+namespace Snafets.Extensions.Logging.TracesOnError.IntegrationTests;
 
 internal class CustomWebApplicationFactory(Action<ILoggingBuilder> configureLogging) : WebApplicationFactory<Program>
 {

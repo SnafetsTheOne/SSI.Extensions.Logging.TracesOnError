@@ -1,6 +1,0 @@
-@SSI.Extensions.Logging.TracesOnError.Console_HostAddress = http://localhost:5186
-
-GET {{SSI.Extensions.Logging.TracesOnError.Console_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

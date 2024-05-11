@@ -1,0 +1,6 @@
+@Snafets.Extensions.Logging.TracesOnError.ApplicationInsights_HostAddress = http://localhost:5147
+
+GET {{Snafets.Extensions.Logging.TracesOnError.ApplicationInsights_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

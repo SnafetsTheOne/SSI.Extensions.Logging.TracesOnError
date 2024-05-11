@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 internal class TracesOnErrorStorageProvider : ITracesOnErrorStorageProvider
 {

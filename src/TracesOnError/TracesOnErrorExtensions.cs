@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging.Configuration;
 using Microsoft.Extensions.Options;
 using System.Text;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 public static class TracesOnErrorExtensions
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 internal record LogEntry<TLogState> : LogEntry
 {

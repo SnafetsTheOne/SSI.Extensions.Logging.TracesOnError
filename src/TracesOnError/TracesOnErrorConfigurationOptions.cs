@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace SSI.Extensions.Logging.TracesOnError;
+namespace Snafets.Extensions.Logging.TracesOnError;
 
 internal class TracesOnErrorConfigurationOptions : IConfigureOptions<LoggerFilterOptions>
 {
