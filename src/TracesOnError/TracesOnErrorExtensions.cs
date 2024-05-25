@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Snafets.Extensions.Logging.TracesOnError;
 
+/// <summary>
+/// Extension methods for adding TracesOnError to the logging pipeline.
+/// </summary>
 public static class TracesOnErrorExtensions
 {
     private const string UninitializedMessage = "TracesOnError has not been initialized. Call AddTracesOnError first.";
@@ -22,23 +25,35 @@ public static class TracesOnErrorExtensions
                                                         throw new InvalidOperationException(UninitializedMessage);
     private static ITracesOnErrorFormatter? _formatter;
 
-    public static ILoggingBuilder AddTracesOnError(this ILoggingBuilder builder, ITracesOnErrorLogSink logSink, ITracesOnErrorFormatter? formatter = null)
+    /// <summary>
+    /// Adds TracesOnError Logger to the logging pipeline.
+    /// </summary>
+    /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
+    /// <param name="logSink">the log sink to use; <see cref="NullTracesOnErrorLogSink"/> if null.</param>
+    /// <param name="formatter">the log message formatter to use. <see cref="TracesOnErrorFormatter"/> if null.</param>
+    public static ILoggingBuilder AddTracesOnError(this ILoggingBuilder builder, ITracesOnErrorLogSink? logSink = null, ITracesOnErrorFormatter? formatter = null)
     {
         builder.AddConfiguration();
 
         _storageProvider = new TracesOnErrorStorageProvider();
         _formatter = formatter ?? new TracesOnErrorFormatter();
-        _logSink = logSink;
+        _logSink = logSink ?? NullTracesOnErrorLogSink.Instance;
 
         builder.Services.AddOptions<TracesOnErrorOptions>().BindConfiguration(TracesOnErrorOptions.SectionName);
         builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>, TracesOnErrorConfigurationOptions>();
 
         builder.Services.AddSingleton<ILoggerProvider>(sp => 
-            new TracesOnErrorLoggerProvider(logSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
+            new TracesOnErrorLoggerProvider(_logSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
         
         return builder;
     }
 
+    /// <summary>
+    /// Adds TracesOnError Logger to the logging pipeline.
+    /// </summary>
+    /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
+    /// <param name="logSink">the log sink to use</param>
+    /// <param name="formatter">the log message formatter to use. <see cref="TracesOnErrorFormatter"/> if null.</param>
     public static ILoggingBuilder AddTracesOnError(this ILoggingBuilder builder, Action<string> logSink, ITracesOnErrorFormatter? formatter = null)
     {
         builder.AddConfiguration();
@@ -56,28 +71,27 @@ public static class TracesOnErrorExtensions
         return builder;
     }
 
+    /// <summary>
+    /// Adds AddTracesOnError to the logging pipeline.
+    /// </summary>
+    /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
+    /// <param name="formatter"></param>
+    [Obsolete("Use AddTracesOnError instead")]
     public static ILoggingBuilder AddTracesOnErrorWithoutLogSink(this ILoggingBuilder builder, ITracesOnErrorFormatter? formatter = null)
     {
-        builder.AddConfiguration();
-
-        _storageProvider = new TracesOnErrorStorageProvider();
-        _formatter = formatter ?? new TracesOnErrorFormatter();
-        _logSink = NullTracesOnErrorLogSink.Instance;
-
-        builder.Services.AddOptions<TracesOnErrorOptions>().BindConfiguration(TracesOnErrorOptions.SectionName);
-        builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>, TracesOnErrorConfigurationOptions>();
-
-        builder.Services.AddSingleton<ILoggerProvider>(sp =>
-            new TracesOnErrorLoggerProvider(LogSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
-
-        return builder;
+        return AddTracesOnError(builder, formatter: formatter);
     }
 
-
+    /// <summary>
+    /// Writes an error log message that includes all previous log entries.
+    /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
+    /// <param name="exception">The exception to log.</param>
+    /// <param name="message">Format string of the log message.</param>
     public static void LogErrorWithTraces<T>(this ILogger<T> logger, Exception exception, string message)
     {
         IList<LogEntry> logs;
-        if(_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
+        if(_storageProvider != null && _formatter != null && (logs = StorageProvider.GetLogs()).Any())
         {
             var traces = Formatter.ProcessMessagesOnly(logs) + "  " + message + Environment.NewLine;
             logger.LogError(exception, traces);
@@ -88,10 +102,15 @@ public static class TracesOnErrorExtensions
         }
     }
 
+    /// <summary>
+    /// Writes an error log message that includes all previous log entries.
+    /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
+    /// <param name="message">Format string of the log message.</param>
     public static void LogErrorWithTraces<T>(this ILogger<T> logger, string message)
     {
         IList<LogEntry> logs;
-        if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
+        if (_storageProvider != null && _formatter != null && (logs = StorageProvider.GetLogs()).Any())
         {
             var traces = Formatter.ProcessMessagesOnly(logs) + "  " + message + Environment.NewLine;
             logger.LogError(traces);
@@ -102,10 +121,16 @@ public static class TracesOnErrorExtensions
         }
     }
 
+    /// <summary>
+    /// Writes a critical log message that includes all previous log entries.
+    /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
+    /// <param name="exception">The exception to log.</param>
+    /// <param name="message">Format string of the log message.</param>
     public static void LogCriticalWithTraces<T>(this ILogger<T> logger, Exception exception, string message)
     {
         IList<LogEntry> logs;
-        if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
+        if (_storageProvider != null && _formatter != null && (logs = StorageProvider.GetLogs()).Any())
         {
             var traces = Formatter.ProcessMessagesOnly(logs) + Environment.NewLine + "  " + message;
             logger.LogCritical(exception, traces);
@@ -116,10 +141,15 @@ public static class TracesOnErrorExtensions
         }
     }
 
+    /// <summary>
+    /// Writes a critical log message that includes all previous log entries.
+    /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/> to write to.</param>
+    /// <param name="message">Format string of the log message.</param>
     public static void LogCriticalWithTraces<T>(this ILogger<T> logger, string message)
     {
         IList<LogEntry> logs;
-        if (_storageProvider != null && _formatter != null & (logs = StorageProvider.GetLogs()).Any())
+        if (_storageProvider != null && _formatter != null && (logs = StorageProvider.GetLogs()).Any())
         {
             var traces = Formatter.ProcessMessagesOnly(logs) + Environment.NewLine + "  " + message;
             logger.LogCritical(traces);

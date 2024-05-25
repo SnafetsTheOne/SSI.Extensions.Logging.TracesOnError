@@ -5,8 +5,12 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
 	"features": {
-		"ghcr.io/devcontainers/features/dotnet:2": {}
-	}
+		"ghcr.io/devcontainers/features/dotnet:2": {},
+		"node": {
+			"version": "lts",
+			"nodeGypDependencies": true
+		}	
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -20,7 +24,18 @@
 	// }
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
+	"postCreateCommand": "dotnet restore",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode-remote.remote-containers",
+				"ms-dotnettools.csdevkit",
+				"SonarSource.sonarlint-vscode",
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.vscode-dotnet-runtime"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},

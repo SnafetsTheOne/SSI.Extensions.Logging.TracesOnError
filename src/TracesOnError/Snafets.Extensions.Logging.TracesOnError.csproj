@@ -15,6 +15,7 @@
     <ProjectURL>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</ProjectURL>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Tags>Logging</Tags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
