@@ -1,6 +1,6 @@
 @Snafets.Extensions.Logging.TracesOnError.EnrichExisting_HostAddress = http://localhost:5051
 
-GET {{Snafets.Extensions.Logging.TracesOnError.EnrichExisting_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{Snafets.Extensions.Logging.TracesOnError.EnrichExisting_HostAddress}}/test/
+Accept: */*
 
 ###
