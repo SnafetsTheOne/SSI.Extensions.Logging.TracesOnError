@@ -32,7 +32,8 @@
 				"ms-dotnettools.csdevkit",
 				"SonarSource.sonarlint-vscode",
 				"ms-dotnettools.csharp",
-				"ms-dotnettools.vscode-dotnet-runtime"
+				"ms-dotnettools.vscode-dotnet-runtime",
+				"github.vscode-github-actions"
 			]
 		}
 	}
