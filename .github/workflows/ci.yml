@@ -34,7 +34,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: pwsh
-        run: dotnet-sonarscanner begin /k:"snafetstheone_snafets-extensions-logging-tracesonerror" /o:"snafetstheone" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" /d:sonar.dotnet.excludeTestProjects=true /d:sonar.coverage.exclusions=examples/**
+        run: dotnet-sonarscanner begin `
+          /k:"snafetstheone_snafets-extensions-logging-tracesonerror" `
+          /o:"snafetstheone" `
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+          /d:sonar.host.url="https://sonarcloud.io" `
+          /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" `
+          /d:sonar.dotnet.excludeTestProjects=true `
+          /d:sonar.coverage.exclusions=examples/**
 
       - name: Restore
         run: dotnet restore
