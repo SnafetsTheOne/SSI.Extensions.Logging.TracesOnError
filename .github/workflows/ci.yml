@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: pwsh
-        run: dotnet-sonarscanner begin /k:"snafetstheone_snafets-extensions-logging-tracesonerror" /o:"snafetstheone" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverageReportPaths="./coverage/report.cobertuera.xml" /d:sonar.dotnet.excludeTestProjects=true
+        run: dotnet-sonarscanner begin /k:"snafetstheone_snafets-extensions-logging-tracesonerror" /o:"snafetstheone" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" /d:sonar.dotnet.excludeTestProjects=true
 
       - name: Restore
         run: dotnet restore
@@ -46,7 +46,7 @@ jobs:
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Coverage
-        run: dotnet-coverage merge ./coverage/ -f cobertura -o ./coverage/report.cobertuera.xml
+        run: dotnet-coverage merge ./coverage/ -f xml -o ./coverage/coverage.xml
 
       - name: end sonarqube scan
         env:
