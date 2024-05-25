@@ -43,7 +43,7 @@ public static class TracesOnErrorExtensions
         builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>, TracesOnErrorConfigurationOptions>();
 
         builder.Services.AddSingleton<ILoggerProvider>(sp => 
-            new TracesOnErrorLoggerProvider(logSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
+            new TracesOnErrorLoggerProvider(_logSink, StorageProvider, _formatter, sp.GetRequiredService<IOptionsMonitor<TracesOnErrorOptions>>()));
         
         return builder;
     }
