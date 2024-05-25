@@ -24,30 +24,10 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v3
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: pwsh
+      - name: Install dotnet coverage and sonarscanner
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-
-      - name: Install dotnet coverage
-        run: dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-sonarscanner
 
       - name: begin sonarqube scan
         env:
