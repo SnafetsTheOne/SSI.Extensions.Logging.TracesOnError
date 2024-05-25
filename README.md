@@ -20,3 +20,8 @@ see /examples
 ## License
 
 Snafets.Extensions.Logging.TracesOnError is licensed under the [MIT](LICENSE.TXT) license.
+
+## Code Quality
+
+This Project uses SonarCloud for code quality checks. You can find the SonarCloud Dashboard 
+[here](https://sonarcloud.io/project/configuration?id=snafetstheone_snafets-extensions-logging-tracesonerror)
