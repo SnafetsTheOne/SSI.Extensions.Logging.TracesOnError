@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "MySonarCloudConnection",
+        "projectKey": "snafetstheone_snafets-extensions-logging-tracesonerror"
+    }
+}

@@ -7,10 +7,12 @@ namespace Snafets.Extensions.Logging.TracesOnError.TestApi.Controllers;
 
 public class EnrichedController(ILogger<EnrichedController> logger) : ControllerBase
 {
+    const string TraceMessage = "TraceMessage";
+
     [HttpGet("Error/Message")]
     public void ErrorMessage()
     {
-        logger.LogTrace("TraceMessage");
+        logger.LogTrace(TraceMessage);
 
         logger.LogErrorWithTraces("ErrorMessage");
     }
@@ -18,7 +20,7 @@ public class EnrichedController(ILogger<EnrichedController> logger) : Controller
     [HttpGet("Error/Exception")]
     public void ErrorException()
     {
-        logger.LogTrace("TraceMessage");
+        logger.LogTrace(TraceMessage);
 
         try
         {
@@ -32,7 +34,7 @@ public class EnrichedController(ILogger<EnrichedController> logger) : Controller
     [HttpGet("Critical/Message")]
     public void CriticalMessage()
     {
-        logger.LogTrace("TraceMessage");
+        logger.LogTrace(TraceMessage);
 
         logger.LogCriticalWithTraces("CriticalMessage");
     }
@@ -40,7 +42,7 @@ public class EnrichedController(ILogger<EnrichedController> logger) : Controller
     [HttpGet("Critical/Exception")]
     public void CriticalException()
     {
-        logger.LogTrace("TraceMessage");
+        logger.LogTrace(TraceMessage);
 
         try
         {

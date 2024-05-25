@@ -2,9 +2,12 @@
 
 namespace Snafets.Extensions.Logging.TracesOnError;
 
+/// <summary>
+/// Options for the TracesOnError Logger.
+/// </summary>
 public class TracesOnErrorOptions
 {
-    internal static string SectionName = "Logging:TracesOnError";
+    internal const string SectionName = "Logging:TracesOnError";
 
     /// <summary>
     /// Gets or sets the minimum level of log that is required to be activated.
