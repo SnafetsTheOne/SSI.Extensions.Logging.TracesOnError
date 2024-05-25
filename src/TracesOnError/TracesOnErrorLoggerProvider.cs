@@ -53,8 +53,17 @@ internal class TracesOnErrorLoggerProvider : ILoggerProvider, ISupportExternalSc
         }
     }
     
+    private void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _optionsReloadToken?.Dispose();
+        }
+    }
+
     public void Dispose()
     {
-        _optionsReloadToken?.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

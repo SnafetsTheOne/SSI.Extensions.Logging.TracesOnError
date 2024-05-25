@@ -16,7 +16,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Tags>Logging</Tags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
