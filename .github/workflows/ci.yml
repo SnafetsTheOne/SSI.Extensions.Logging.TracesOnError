@@ -29,7 +29,7 @@ jobs:
           dotnet tool install --global dotnet-coverage
           dotnet tool install --global dotnet-sonarscanner
 
-      - name: begin sonarqube scan
+      - name: Setup SonarQube Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -41,7 +41,9 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" `
           /d:sonar.dotnet.excludeTestProjects=true `
-          /d:sonar.coverage.exclusions=examples/**
+          /d:sonar.coverage.exclusions=examples/** `
+          /d:sonar.qualitygate.wait=true `
+          /d:sonar.qualitygate.timeout=300
 
       - name: Restore
         run: dotnet restore
@@ -55,7 +57,7 @@ jobs:
       - name: Coverage
         run: dotnet-coverage merge ./coverage/ -f xml -o ./coverage/coverage.xml
 
-      - name: end sonarqube scan
+      - name: SonarQube Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
