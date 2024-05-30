@@ -6,31 +6,29 @@
 
 provides functionality to enrich log messages with all previous traces
 
+## Motivation
+
+When an exception is thrown it is often hard to understand the context of the error. This library provides a way to enrich the log message with all previous traces. This can be very helpful to understand the context of the error. Enabling `LogLevel = Trace` is often not feasable as in modern cloud environements the cost of logging can often exeed the cost of the application itself. By only logging debug information when an error occurs the cost of logging can be reduced.
+
 ## Usage
 
-During Setup Register `TracesOnError`
+During Setup register `TracesOnError`, also some parameters are possible to add a logsink or to setup some options.
 ``` csharp
-IWebApplicationBuilder builder = ...;
-builder.Logging.AddTracesOnError(logSink: Console.WriteLine);
-```
-or
-``` csharp
-IWebApplicationBuilder builder = ...;
-builder.Logging.AddTracesOnErrorWithoutLogSink();
+((ILoggingBuilder)builder).AddTracesOnError();
 ```
 
-Log Messages normally 
+Log Messages normally, which has no effects on other loggers. But when specifying a `ITracesOnErrorLogSink` then the error messages are writen to that sink.
 ``` csharp
 ((ILogger)logger).LogError(exception, "error message");
 ```
-Or use the new extension methods
+To encance the log messages of other loggers use our new extension methods for `ILogger`:
 ``` csharp
 ((ILogger)logger).LogErrorWithTraces(exception, "error message");
 ```
 
 ## Examples
 
-For example implementations see [examples](https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError/tree/main/examples)
+Look for some example implementations in our [examples](https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError/tree/main/examples) folder.
 
 ## How can I contribute?
 
