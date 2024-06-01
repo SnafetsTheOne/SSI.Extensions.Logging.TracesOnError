@@ -30,4 +30,8 @@
 		<InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
 </Project>
