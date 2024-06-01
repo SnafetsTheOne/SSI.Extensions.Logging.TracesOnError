@@ -93,6 +93,7 @@ jobs:
           VERSION="${{ github.ref_name }}"
           echo "Version: $VERSION"
           dotnet pack -c Release --include-source -p:Version=$VERSION -o ./dist src/TracesOnError/Snafets.Extensions.Logging.TracesOnError.csproj
+          dotnet pack -c Release --include-source -p:Version=$VERSION -o ./dist src/TracesOnError.ApplicationInsights/Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.csproj
 
       - name: Push
         run: dotnet nuget push ./dist/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
