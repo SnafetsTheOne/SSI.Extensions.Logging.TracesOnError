@@ -29,7 +29,7 @@ jobs:
 
       - name: Install dotnet coverage and sonarscanner
         run: |
-          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-reportgenerator-globaltool
           dotnet tool install --global dotnet-sonarscanner
 
       - name: Setup SonarQube Scan
@@ -42,8 +42,7 @@ jobs:
           /o:"snafetstheone" `
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
-          /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" `
-          /d:sonar.coverage.jacoco.xmlReportPaths="./coverage/coverage.xml" `
+          /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/Cobertura.xml" `
           /d:sonar.dotnet.excludeTestProjects=true `
           /d:sonar.coverage.exclusions=examples/**,tests\** `
           /d:sonar.qualitygate.wait=true `
@@ -59,7 +58,7 @@ jobs:
         run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Coverage
-        run: dotnet-coverage merge ./coverage/ -f xml -o coverage/coverage.xml
+        run: reportgenerator -reports:./coverage/**/*.xml -targetdir:./coverage -reporttypes:'cobertura'
 
       - name: SonarQube Scan
         env:
