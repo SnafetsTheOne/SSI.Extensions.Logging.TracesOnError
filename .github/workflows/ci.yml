@@ -43,6 +43,7 @@ jobs:
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
           /d:sonar.cs.vscoveragexml.reportsPaths="./coverage/coverage.xml" `
+          /d:sonar.coverage.jacoco.xmlReportPaths="./coverage/coverage.xml" `
           /d:sonar.dotnet.excludeTestProjects=true `
           /d:sonar.coverage.exclusions=examples/**,tests\** `
           /d:sonar.qualitygate.wait=true `
