@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\TracesOnError.ApplicationInsights\Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.csproj" />
     <ProjectReference Include="..\..\src\TracesOnError\Snafets.Extensions.Logging.TracesOnError.csproj" />
   </ItemGroup>
 

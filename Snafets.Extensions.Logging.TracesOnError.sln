@@ -13,20 +13,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{3BA75261-91AE-4491-B4EC-31D2D53E70FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.Console", "examples\Snafets.Extensions.Logging.TracesOnError.Console\Snafets.Extensions.Logging.TracesOnError.Console.csproj", "{76EEEB3F-3681-47A9-A5F7-9816A660CD92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.ConsoleExample", "examples\TracesOnError.ConsoleExample\Snafets.Extensions.Logging.TracesOnError.ConsoleExample.csproj", "{76EEEB3F-3681-47A9-A5F7-9816A660CD92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.EnrichExisting", "examples\Snafets.Extensions.Logging.TracesOnError.EnrichExisting\Snafets.Extensions.Logging.TracesOnError.EnrichExisting.csproj", "{1F84776D-E102-45C5-ABF2-2DD75770B18E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.EnrichExistingExample", "examples\TracesOnError.EnrichExistingExample\Snafets.Extensions.Logging.TracesOnError.EnrichExistingExample.csproj", "{1F84776D-E102-45C5-ABF2-2DD75770B18E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.ApplicationInsights", "examples\Snafets.Extensions.Logging.TracesOnError.ApplicationInsights\Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.csproj", "{A01E8D14-5984-43D9-9F7B-E6A7445D9F96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsExample", "examples\TracesOnError.ApplicationInsightsExample\Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsExample.csproj", "{A01E8D14-5984-43D9-9F7B-E6A7445D9F96}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.IntegrationTests", "tests\TracesOnError.IntegrationTests\Snafets.Extensions.Logging.TracesOnError.IntegrationTests.csproj", "{BB17CE13-4D80-4745-9A94-B5344DFB9142}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.TestApi", "tests\Snafets.Extensions.Logging.TracesOnError.TestApi\Snafets.Extensions.Logging.TracesOnError.TestApi.csproj", "{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.TestApi", "tests\TracesOnError.TestApi\Snafets.Extensions.Logging.TracesOnError.TestApi.csproj", "{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0888B6B-F8B9-423D-88A4-E67196A80ED0}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snafets.Extensions.Logging.TracesOnError.ApplicationInsights", "src\TracesOnError.ApplicationInsights\Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.csproj", "{6AED8749-4850-4C04-AD62-126D865CAA14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests", "tests\TracesOnError.ApplicationInsightsTests\Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests.csproj", "{699EDC65-9278-4B33-9020-997BA45DDB8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +66,14 @@ Global
 		{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AED8749-4850-4C04-AD62-126D865CAA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AED8749-4850-4C04-AD62-126D865CAA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AED8749-4850-4C04-AD62-126D865CAA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AED8749-4850-4C04-AD62-126D865CAA14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699EDC65-9278-4B33-9020-997BA45DDB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699EDC65-9278-4B33-9020-997BA45DDB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699EDC65-9278-4B33-9020-997BA45DDB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699EDC65-9278-4B33-9020-997BA45DDB8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +86,8 @@ Global
 		{A01E8D14-5984-43D9-9F7B-E6A7445D9F96} = {3BA75261-91AE-4491-B4EC-31D2D53E70FC}
 		{BB17CE13-4D80-4745-9A94-B5344DFB9142} = {2801153A-E216-4B90-BE10-D0AF26E0413A}
 		{7E1E19D2-39BD-4C27-B7D5-97BD1353E8E9} = {2801153A-E216-4B90-BE10-D0AF26E0413A}
+		{6AED8749-4850-4C04-AD62-126D865CAA14} = {DDAAA82A-3C8A-4D83-8C81-EEE056440473}
+		{699EDC65-9278-4B33-9020-997BA45DDB8D} = {2801153A-E216-4B90-BE10-D0AF26E0413A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {393C11B1-5640-44D5-B257-4B8ED6044A6F}

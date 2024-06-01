@@ -8,7 +8,7 @@ provides functionality to enrich log messages with all previous traces
 
 ## Motivation
 
-When an exception is thrown it is often hard to understand the context of the error. This library provides a way to enrich the log message with all previous traces. This can be very helpful to understand the context of the error. Enabling `LogLevel = Trace` is often not feasable as in modern cloud environements the cost of logging can often exeed the cost of the application itself. By only logging debug information when an error occurs the cost of logging can be reduced.
+When an exception is thrown it is often hard to understand the context of the error. This library provides a way to enrich the log message with all previous traces. This can be very helpful to understand the context of the error. Enabling `LogLevel == Trace` is often not feasable as in modern cloud environements the cost of logging can often exeed the cost of the application itself. By only logging debug information when an error occurs the cost of logging can be reduced.
 
 ## Usage
 
@@ -24,6 +24,15 @@ Log Messages normally, which has no effects on other loggers. But when specifyin
 To encance the log messages of other loggers use our new extension methods for `ILogger`:
 ``` csharp
 ((ILogger)logger).LogErrorWithTraces(exception, "error message");
+```
+
+### Application Insights
+
+To use Application Insights as a log sink, you can use the `Snafets.Extensions.Logging.TracesOnError.ApplicationInsights` package. 
+
+``` csharp
+TelemetryClient telemetryClient = ...; // initialize the client as you would normally do
+((ILoggingBuilder)builder).AddTracesOnErrorApplicationInsights(telemetryClient);
 ```
 
 ## Examples

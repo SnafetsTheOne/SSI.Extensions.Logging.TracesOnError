@@ -1,16 +1,17 @@
 using Snafets.Extensions.Logging.TracesOnError;
-using Snafets.Extensions.Logging.TracesOnError.ApplicationInsights;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add logging to the container.
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddTracesOnError();
 
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplicationInsightsTelemetry();
-
-builder.Logging.AddTracesOnError(logSink: new ApplicationInsightsLogSink());
 
 var app = builder.Build();
 
