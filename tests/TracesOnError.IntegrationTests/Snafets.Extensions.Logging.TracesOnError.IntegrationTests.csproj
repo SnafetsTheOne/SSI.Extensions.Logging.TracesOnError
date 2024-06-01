@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\TracesOnError\Snafets.Extensions.Logging.TracesOnError.csproj" />
-    <ProjectReference Include="..\Snafets.Extensions.Logging.TracesOnError.TestApi\Snafets.Extensions.Logging.TracesOnError.TestApi.csproj" />
+    <ProjectReference Include="..\TracesOnError.TestApi\Snafets.Extensions.Logging.TracesOnError.TestApi.csproj" />
   </ItemGroup>
 
 </Project>

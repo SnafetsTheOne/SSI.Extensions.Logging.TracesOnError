@@ -14,7 +14,6 @@ internal record LogEntry<TLogState> : LogEntry
 /// </summary>
 public record LogEntry
 {
-
     /// <summary>
     /// Gets the log category
     /// </summary>
