@@ -4,7 +4,7 @@
 
 # Snafets.Extensions.Logging.TracesOnError.ApplicationInsights
 
-writes all previous traces into a message to appinsights when an error occurs.
+writes all scoped traces into a telemetry item to appinsights when an error occurs.
 
 # Usage
 

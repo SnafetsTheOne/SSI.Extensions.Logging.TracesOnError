@@ -4,7 +4,7 @@
 
 # Snafets.Extensions.Logging.TracesOnError
 
-provides functionality to write all traces into a single message when an error occurs.
+provides functionality to write all scoped logs into a single message when an error occurs.
 
 ## Motivation
 
