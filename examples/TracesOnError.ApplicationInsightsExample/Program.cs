@@ -1,5 +1,5 @@
-using Microsoft.ApplicationInsights;
 using Snafets.Extensions.Logging.TracesOnError.ApplicationInsights;
+using Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsExample;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +10,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationInsightsTelemetry();
 
-builder.Logging.AddTracesOnErrorApplicationInsights(
-    builder.Services.BuildServiceProvider().GetRequiredService<TelemetryClient>());
+builder.Logging.ClearProviders();
+builder.Logging.AddTracesOnErrorApplicationInsights(configure =>
+{
+    configure.TelemetryChannel = new ConsoleTelemetryChannel();
+});
 
 var app = builder.Build();
 

@@ -10,13 +10,25 @@
   <PropertyGroup>
     <Version>0.1.0</Version>
     <Authors>Stefan Sitkovich</Authors>
-    <Description>provides functionality to enrich log messages with all previous traces</Description>
+    <Description>provides functionality to write all scoped logs into a single message when an error occurs.</Description>
+    <PackageTags>ILogger ILoggerBuilder ILoggerProvider</PackageTags>
     <Copyright>Copyright (c) Stefan Sitkovich 2024</Copyright>
-    <ProjectURL>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</ProjectURL>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</RepositoryUrl>
+    <PackageReleaseNotes>For the release notes please follow https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError/releases</PackageReleaseNotes>
+    <RepositoryType>Git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Tags>Logging</Tags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
@@ -25,13 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.Tests" />
-	  <InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.IntegrationTests" />
-	  <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.Tests" />
+    <InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.IntegrationTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
 </Project>

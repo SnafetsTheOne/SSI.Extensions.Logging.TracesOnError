@@ -13,11 +13,10 @@ public class TracesOnErrorLoggerProviderTests
     {
         var logSink = Substitute.For<ITracesOnErrorLogSink>();
         var storageProvider = Substitute.For<ITracesOnErrorStorageProvider>();
-        var formatter = Substitute.For<ITracesOnErrorFormatter>();
         var options = new TracesOnErrorOptions();
         var optionsMonitor = Substitute.For<IOptionsMonitor<TracesOnErrorOptions>>();
         optionsMonitor.CurrentValue.Returns(options);
-        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, formatter, optionsMonitor);
+        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, optionsMonitor);
 
         var logger = sut.CreateLogger("Test");
         logger.Should().NotBeNull();
@@ -31,11 +30,10 @@ public class TracesOnErrorLoggerProviderTests
     {
         var logSink = Substitute.For<ITracesOnErrorLogSink>();
         var storageProvider = Substitute.For<ITracesOnErrorStorageProvider>();
-        var formatter = Substitute.For<ITracesOnErrorFormatter>();
         var options = new TracesOnErrorOptions();
         var optionsMonitor = new TestMonitorOptions<TracesOnErrorOptions>(options);
         optionsMonitor.CurrentValue.Returns(options);
-        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, formatter, optionsMonitor);
+        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, optionsMonitor);
 
         var logger = sut.CreateLogger("Test");
         logger.Should().BeOfType<TracesOnErrorLogger>();
@@ -55,11 +53,10 @@ public class TracesOnErrorLoggerProviderTests
     {
         var logSink = Substitute.For<ITracesOnErrorLogSink>();
         var storageProvider = Substitute.For<ITracesOnErrorStorageProvider>();
-        var formatter = Substitute.For<ITracesOnErrorFormatter>();
         var options = new TracesOnErrorOptions();
         var optionsMonitor = Substitute.For<IOptionsMonitor<TracesOnErrorOptions>>();
         optionsMonitor.CurrentValue.Returns(options);
-        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, formatter, optionsMonitor);
+        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, optionsMonitor);
 
         var scopeProvider = Substitute.For<IExternalScopeProvider>();
 
@@ -76,11 +73,10 @@ public class TracesOnErrorLoggerProviderTests
     {
         var logSink = Substitute.For<ITracesOnErrorLogSink>();
         var storageProvider = Substitute.For<ITracesOnErrorStorageProvider>();
-        var formatter = Substitute.For<ITracesOnErrorFormatter>();
         var options = new TracesOnErrorOptions();
         var optionsMonitor = Substitute.For<IOptionsMonitor<TracesOnErrorOptions>>();
         optionsMonitor.CurrentValue.Returns(options);
-        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, formatter, optionsMonitor);
+        var sut = new TracesOnErrorLoggerProvider(logSink, storageProvider, optionsMonitor);
 
         var logger = sut.CreateLogger("Test");
         logger.Should().BeOfType<TracesOnErrorLogger>();

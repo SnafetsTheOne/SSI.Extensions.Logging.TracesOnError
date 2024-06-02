@@ -2,28 +2,34 @@
 using Microsoft.Extensions.Logging;
 using System.Globalization;
 using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.Options;
 
 namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsights;
 
 internal class ApplicationInsightsLogSink : ITracesOnErrorLogSink
 {
     private readonly TelemetryClient _telemetryClient;
-    private readonly TracesOnErrorApplicationInsightsOptions _options;
+    private readonly IOptions<TracesOnErrorOptions> _options;
+    private readonly IOptions<TracesOnErrorApplicationInsightsOptions> _aiOptions;
 
-    public ApplicationInsightsLogSink(TelemetryClient telemetryClient, TracesOnErrorApplicationInsightsOptions options)
+    public ApplicationInsightsLogSink(IOptions<TelemetryConfiguration> telemetryConfiguration
+        , IOptions<TracesOnErrorOptions> options
+        , IOptions<TracesOnErrorApplicationInsightsOptions> aiOptions)
     {
-        _telemetryClient = telemetryClient;
+        _telemetryClient = new TelemetryClient(telemetryConfiguration.Value);
         _options = options;
+        _aiOptions = aiOptions;
     }
 
-    public void WriteLog(IList<LogEntry> logs)
+    public void WriteLog(IReadOnlyList<LogEntry> logs)
     {
         if (!logs.Any())
             return;
 
-        var triggeringLog = logs.Last();
+        var triggeringLog = logs[^1];
 
-        if (triggeringLog.Exception != null && _options.TrackExceptionsAsExceptionTelemetry)
+        if (triggeringLog.Exception != null && _aiOptions.Value.TrackExceptionsAsExceptionTelemetry)
         {
             var telemetry = new ExceptionTelemetry()
             {
@@ -48,24 +54,19 @@ internal class ApplicationInsightsLogSink : ITracesOnErrorLogSink
 
     private static SeverityLevel GetSeverityLevel(LogLevel logLevel)
     {
-        switch (logLevel)
+        return logLevel switch
         {
-            case LogLevel.Critical:
-                return SeverityLevel.Critical;
-            case LogLevel.Error:
-                return SeverityLevel.Error;
-            case LogLevel.Warning:
-                return SeverityLevel.Warning;
-            case LogLevel.Information:
-                return SeverityLevel.Information;
-            case LogLevel.Debug:
-            case LogLevel.Trace:
-            default:
-                return SeverityLevel.Verbose;
-        }
+            LogLevel.Critical => SeverityLevel.Critical,
+            LogLevel.Error => SeverityLevel.Error,
+            LogLevel.Warning => SeverityLevel.Warning,
+            LogLevel.Information => SeverityLevel.Information,
+            LogLevel.Debug => SeverityLevel.Verbose,
+            LogLevel.Trace => SeverityLevel.Verbose,
+            _ => SeverityLevel.Verbose
+        };
     }
 
-    private void PopulateTelemetry(IDictionary<string, string> telemetryItem, IList<LogEntry> logs)
+    private void PopulateTelemetry(IDictionary<string, string> telemetryItem, IReadOnlyList<LogEntry> logs)
     {
         for(var i = 0; i < logs.Count; i++)
         {
@@ -76,11 +77,11 @@ internal class ApplicationInsightsLogSink : ITracesOnErrorLogSink
     private void PopulateTelemetry(IDictionary<string, string> dict, string prefix, LogEntry log)
     {
         dict[prefix + "Message"] = log.Message;
-        if (_options.IncludeCategory)
+        if (_aiOptions.Value.IncludeCategory)
         {
             dict[prefix + "CategoryName"] = log.Category;
         }
-        if(_options.IncludeLogLevel)
+        if(_aiOptions.Value.IncludeLogLevel)
         {
             dict[prefix + "LogLevel"] = log.LogLevel.ToString();
         }
@@ -88,15 +89,15 @@ internal class ApplicationInsightsLogSink : ITracesOnErrorLogSink
         {
             dict[prefix + "Exception"] = log.Exception.ToString();
         }
-        if(_options.IncludeEventId && log.EventId != 0)
+        if(_aiOptions.Value.IncludeEventId && log.EventId != 0)
         {
             dict[prefix + "EventId"] = log.EventId.Id.ToString(CultureInfo.InvariantCulture);
         }
-        if(_options.IncludeEventId && !string.IsNullOrEmpty(log.EventId.Name))
+        if(_aiOptions.Value.IncludeEventId && !string.IsNullOrEmpty(log.EventId.Name))
         {
             dict[prefix + "EventName"] = log.EventId.Name;
         }
-        if(_options.IncludeScopes)
+        if(_options.Value.IncludeScopes && log.Scopes != null)
         {
             dict[prefix + "Scope"] = string.Join(" => ", log.Scopes);
         }

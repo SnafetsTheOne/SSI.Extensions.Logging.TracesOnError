@@ -10,13 +10,25 @@
   <PropertyGroup>
     <Version>0.1.0</Version>
     <Authors>Stefan Sitkovich</Authors>
-    <Description>provides functionality to enrich telemetry with all previous traces</Description>
+    <Description>writes all scoped traces into a telemetry item to appinsights when an error occurs.</Description>
+    <PackageTags>ILogger ILoggerBuilder ILoggerProvider ApplicationInsights</PackageTags>
     <Copyright>Copyright (c) Stefan Sitkovich 2024</Copyright>
-    <ProjectURL>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</ProjectURL>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError</RepositoryUrl>
+    <PackageReleaseNotes>For the release notes please follow https://github.com/SnafetsTheOne/Snafets.Extensions.Logging.TracesOnError/releases</PackageReleaseNotes>
+    <RepositoryType>Git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Tags>Logging, ApplicationInsights</Tags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights" />
@@ -26,12 +38,8 @@
     <ProjectReference Include="..\TracesOnError\Snafets.Extensions.Logging.TracesOnError.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-		<InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-	</ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.Tests" />
+  </ItemGroup>
 
 </Project>

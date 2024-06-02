@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.Controllers;
+namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsExample.Controllers;
 
 [ApiController]
 [Route("[controller]")]

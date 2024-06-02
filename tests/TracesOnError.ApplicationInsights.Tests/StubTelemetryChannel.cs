@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.ApplicationInsights.Channel;
+﻿using Microsoft.ApplicationInsights.Channel;
 
-namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
+namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.Tests
 {
     internal class StubTelemetryChannel : ITelemetryChannel
     {

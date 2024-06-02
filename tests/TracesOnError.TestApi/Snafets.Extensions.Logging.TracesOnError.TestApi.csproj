@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.IntegrationTests" />
+		<InternalsVisibleTo Include="Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.IntegrationTests" />
 	</ItemGroup>
 
 	<ItemGroup>

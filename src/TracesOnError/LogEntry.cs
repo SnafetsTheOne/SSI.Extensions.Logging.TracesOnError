@@ -2,10 +2,10 @@
 
 namespace Snafets.Extensions.Logging.TracesOnError;
 
-internal record LogEntry<TLogState> : LogEntry
+internal record LogEntry<TState> : LogEntry
 {
-    public TLogState State { get; init; } = default!;
-    public Func<TLogState, Exception?, string> Formatter { get; init; } = default!;
+    public TState State { get; init; } = default!;
+    public Func<TState, Exception?, string> Formatter { get; init; } = default!;
     public override string Message => Formatter(State, Exception);
 }
 
@@ -27,10 +27,6 @@ public record LogEntry
     /// </summary>
     public EventId EventId { get; init; }
     /// <summary>
-    /// Gets the scopes that where active at the time of the log
-    /// </summary>
-    public IList<string?> Scopes { get; init; } = default!;
-    /// <summary>
     /// Gets the log message
     /// </summary>
     public virtual string Message { get; init; } = default!;
@@ -38,4 +34,9 @@ public record LogEntry
     /// Gets the log exception
     /// </summary>
     public Exception? Exception { get; init; }
+
+    /// <summary>
+    /// Gets the log scopes
+    /// </summary>
+    public IList<object?>? Scopes { get; init; }
 }

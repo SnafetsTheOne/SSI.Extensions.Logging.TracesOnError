@@ -1,38 +1,35 @@
-using Microsoft.ApplicationInsights;
-using Microsoft.ApplicationInsights.Channel;
-using Microsoft.ApplicationInsights.Extensibility;
-using Snafets.Extensions.Logging.TracesOnError.ApplicationInsights;
-using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
+namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsights.Tests
 {
     public class ApplicationInsightsLogSinkTests
     {
         private readonly TelemetryConfiguration _telemetryConfiguration;
-        private readonly TelemetryClient _telemetryClient;
         private readonly IList<ITelemetry> _telemetryItems;
 
-        private static readonly LogEntry LogEntry1 = new LogEntry
+        private static readonly LogEntry LogEntry1 = new()
         {
             LogLevel = LogLevel.Critical,
             Category = "Category 1",
             EventId = new EventId(1, "1"),
             Message = "Message 1",
             Exception = new Exception("Test exception"),
-            Scopes = new List<string?> { "Scope 1.1", "Scope 1.1" }
+            Scopes = new List<object?> { "Scope 1.1", "Scope 1.1" }
         };
-        private static readonly LogEntry LogEntry2 = new LogEntry
+        private static readonly LogEntry LogEntry2 = new()
         {
             LogLevel = LogLevel.Information,
             Category = "Category 2",
             EventId = new EventId(2),
             Message = "Message 2",
-            Scopes = new List<string?> { "Scope 2" }
+            Scopes = new List<object?> { "Scope 2" }
         };
-        private static readonly LogEntry LogEntry3 = new LogEntry
+        private static readonly LogEntry LogEntry3 = new()
         {
             LogLevel = LogLevel.Information,
             Category = "Category 3",
@@ -48,7 +45,6 @@ namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
             {
                 OnSend = (telemetry) => _telemetryItems.Add(telemetry)
             };
-            _telemetryClient = new TelemetryClient(_telemetryConfiguration);
         }
 
         [Fact]
@@ -58,7 +54,9 @@ namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
             {
                 LogEntry1
             };
-            var sut = new ApplicationInsightsLogSink(_telemetryClient, new TracesOnErrorApplicationInsightsOptions());
+            var sut = new ApplicationInsightsLogSink(new OptionsWrapper<TelemetryConfiguration>(_telemetryConfiguration)
+                , new OptionsWrapper<TracesOnErrorOptions>(new TracesOnErrorOptions())
+                , new OptionsWrapper<TracesOnErrorApplicationInsightsOptions>(new TracesOnErrorApplicationInsightsOptions()));
 
             sut.WriteLog(logs);
 
@@ -76,7 +74,9 @@ namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
                 LogEntry2,
                 LogEntry1,
             };
-            var sut = new ApplicationInsightsLogSink(_telemetryClient, new TracesOnErrorApplicationInsightsOptions());
+            var sut = new ApplicationInsightsLogSink(new OptionsWrapper<TelemetryConfiguration>(_telemetryConfiguration)
+                , new OptionsWrapper<TracesOnErrorOptions>(new TracesOnErrorOptions())
+                , new OptionsWrapper<TracesOnErrorApplicationInsightsOptions>(new TracesOnErrorApplicationInsightsOptions()));
 
             sut.WriteLog(logs);
 
@@ -119,14 +119,17 @@ namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
             {
                 LogEntry1
             };
-            var sut = new ApplicationInsightsLogSink(_telemetryClient, new TracesOnErrorApplicationInsightsOptions()
+            var sut = new ApplicationInsightsLogSink(new OptionsWrapper<TelemetryConfiguration>(_telemetryConfiguration)
+                , new OptionsWrapper<TracesOnErrorOptions>(new TracesOnErrorOptions()
+            {
+                IncludeScopes = false,
+            }), new OptionsWrapper<TracesOnErrorApplicationInsightsOptions>(new TracesOnErrorApplicationInsightsOptions()
             {
                 IncludeCategory = false,
                 IncludeEventId = false,
                 IncludeLogLevel = false,
-                IncludeScopes = true,
                 TrackExceptionsAsExceptionTelemetry = false
-            });
+            }));
 
             sut.WriteLog(logs);
 
@@ -145,7 +148,9 @@ namespace Snafets.Extensions.Logging.TracesOnError.ApplicationInsightsTests
         [Fact]
         public void WriteLogs_EmptyLog_NothingHappens()
         {
-            var sut = new ApplicationInsightsLogSink(_telemetryClient, new TracesOnErrorApplicationInsightsOptions());
+            var sut = new ApplicationInsightsLogSink(new OptionsWrapper<TelemetryConfiguration>(_telemetryConfiguration)
+                , new OptionsWrapper<TracesOnErrorOptions>(new TracesOnErrorOptions())
+                , new OptionsWrapper<TracesOnErrorApplicationInsightsOptions>(new TracesOnErrorApplicationInsightsOptions()));
 
             sut.WriteLog(new List<LogEntry>());
 

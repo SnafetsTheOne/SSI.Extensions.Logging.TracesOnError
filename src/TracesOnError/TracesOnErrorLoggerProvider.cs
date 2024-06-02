@@ -1,7 +1,6 @@
-﻿using System.Collections.Concurrent;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Collections.Concurrent;
 
 namespace Snafets.Extensions.Logging.TracesOnError;
 
@@ -12,15 +11,13 @@ internal class TracesOnErrorLoggerProvider : ILoggerProvider, ISupportExternalSc
     private readonly ConcurrentDictionary<string, TracesOnErrorLogger> _loggers;
     private readonly ITracesOnErrorLogSink _logSink;
     private readonly ITracesOnErrorStorageProvider _storageProvider;
-    private readonly ITracesOnErrorFormatter _formatter;
     private readonly IDisposable? _optionsReloadToken;
     private IExternalScopeProvider? _scopeProvider;
     
-    public TracesOnErrorLoggerProvider(ITracesOnErrorLogSink logSink, ITracesOnErrorStorageProvider storageProvider, ITracesOnErrorFormatter formatter, IOptionsMonitor<TracesOnErrorOptions> option)
+    public TracesOnErrorLoggerProvider(ITracesOnErrorLogSink logSink, ITracesOnErrorStorageProvider storageProvider, IOptionsMonitor<TracesOnErrorOptions> option)
     {
         _logSink = logSink;
         _storageProvider = storageProvider;
-        _formatter = formatter;
         _options = option;
         _scopeProvider = null;
         _loggers = new ConcurrentDictionary<string, TracesOnErrorLogger>();
@@ -32,7 +29,7 @@ internal class TracesOnErrorLoggerProvider : ILoggerProvider, ISupportExternalSc
     public ILogger CreateLogger(string categoryName)
     {
         return _loggers.GetOrAdd(categoryName, name => 
-            new TracesOnErrorLogger(name, _logSink, _storageProvider, _formatter, _scopeProvider, _options.CurrentValue));
+            new TracesOnErrorLogger(name, _logSink, _storageProvider, _scopeProvider, _options.CurrentValue));
     }
 
     private void ReloadLoggerOptions(TracesOnErrorOptions options) 

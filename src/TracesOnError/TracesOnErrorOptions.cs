@@ -7,18 +7,21 @@ namespace Snafets.Extensions.Logging.TracesOnError;
 /// </summary>
 public class TracesOnErrorOptions
 {
-    internal const string SectionName = "Logging:TracesOnError";
-
     /// <summary>
     /// Gets or sets the minimum level of log that is required to be activated.
     /// </summary>
-    public LogLevel ErrorThreshold { get; set; } = Microsoft.Extensions.Logging.LogLevel.Error;
+    public LogLevel ErrorThreshold { get; set; } = LogLevel.Error;
 
     /// <summary>
-    /// LogLevels for different categories.
+    /// Gets or sets a for the minimum <see cref="LogLevel"/> to save.
     /// </summary>
-    public Dictionary<string, string?> LogLevel { get; set; } = [];
+    public LogLevel MinimumLevelToInclude { get; set; } = LogLevel.Trace;
 
+    /// <summary>
+    /// Explicitly sets the log level for the Microsoft.AspNetCore category.
+    /// </summary>
+    public LogLevel AspNetCoreLogLevel { get; set; } = LogLevel.Warning;
+    
     /// <summary>
     /// Gets or sets a value indicating whether the Scope information is included from telemetry or not.
     /// Defaults to true.
