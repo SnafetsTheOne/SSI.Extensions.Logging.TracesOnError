@@ -4,10 +4,16 @@ namespace Snafets.Extensions.Logging.TracesOnError.TestApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SinkController(ILogger<SinkController> logger) : ControllerBase
+public class ErrorController(ILogger<ErrorController> logger) : ControllerBase
 {
-    [HttpGet("Exception")]
+    [HttpGet("NoError")]
     public void Get()
+    {
+        logger.LogTrace("TraceMessage");
+    }
+
+    [HttpGet("Exception")]
+    public void GetException()
     {
         logger.LogTrace("TraceMessage");
 

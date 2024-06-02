@@ -1,6 +1,18 @@
 ﻿namespace Snafets.Extensions.Logging.TracesOnError;
 
-internal interface ITracesOnErrorStorageProvider
+/// <summary>
+/// Stores logs in the context of a web request.
+/// </summary>
+public interface ITracesOnErrorStorageProvider
 {
-    IList<LogEntry> GetLogs();
+    /// <summary>
+    /// Adds a log entry.
+    /// </summary>
+    /// <param name="logEntry">the log entry to add.</param>
+    void AddLog(LogEntry logEntry);
+
+    /// <summary>
+    /// Gets the logs added in the context of a web request.
+    /// </summary>
+    IReadOnlyList<LogEntry> GetLogs();
 }

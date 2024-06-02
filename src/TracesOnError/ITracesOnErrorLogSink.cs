@@ -8,5 +8,5 @@ public interface ITracesOnErrorLogSink
     /// <summary>
     /// Writes the logs to the sink.
     /// </summary>
-    void WriteLog(IList<LogEntry> logs);
+    void WriteLog(IReadOnlyList<LogEntry> logs);
 }

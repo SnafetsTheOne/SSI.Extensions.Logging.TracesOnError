@@ -13,11 +13,6 @@ public class TracesOnErrorApplicationInsightsOptions
     /// </summary>
     public bool TrackExceptionsAsExceptionTelemetry { get; set; } = true;
     /// <summary>
-    /// Gets or sets a value indicating whether the Scope information is included from telemetry or not.
-    /// Defaults to true.
-    /// </summary>
-    public bool IncludeScopes { get; set; } = false;
-    /// <summary>
     /// Whether to include the log level in the telemetry.
     /// Defaults to true.
     /// </summary>
